@@ -39,8 +39,7 @@ public class SyntaticAnalysis {
     }
 
     private void showError() {
-        System.out.println("Não");
-
+        System.out.println("Nao");
         System.exit(1);
     }
 
@@ -80,10 +79,9 @@ public class SyntaticAnalysis {
         eat(TokenType.CLOSE_PAR);
         eat(TokenType.SEMI_COLON);
         if (current.type == (TokenType.VAR)) {
-            eat(TokenType.VAR);
+            advance();
             procVar();
             while (current.type == TokenType.SEMI_COLON) {
-                advance();
                 procVar();
             }
         }
@@ -118,7 +116,7 @@ public class SyntaticAnalysis {
         procReturn();
         eat(TokenType.SEMI_COLON);
         if (current.type == (TokenType.VAR)) {
-            eat(TokenType.VAR);
+            advance();
             procVar();
             while (current.type == TokenType.SEMI_COLON) {
                 advance();
@@ -172,6 +170,7 @@ public class SyntaticAnalysis {
 
     // <var> ::= <name> [ { ',' <name> } ] ':' <type> ';'
     private void procVar() {
+        System.out.println(" ****** Dentro de procVar: " + current.type);
         procName();
         while (current.type == TokenType.COLON) {
             advance();
