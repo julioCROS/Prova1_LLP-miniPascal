@@ -1,6 +1,6 @@
 import interpreter.command.Command;
 import lexical.LexicalAnalysis;
-import syntatic.SyntaticAnalysis;
+// import syntatic.SyntaticAnalysis;
 import lexical.TokenType;
 import lexical.Lexeme;
 
