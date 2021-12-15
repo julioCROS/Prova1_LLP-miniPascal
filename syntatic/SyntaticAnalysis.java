@@ -63,7 +63,7 @@ public class SyntaticAnalysis {
     }
 
     // < procedure > ::= Procedure < name > ‘ ( ’ [ < param > [ { ‘ ; ’ < param > }
-    // ] ] ‘ ) ’ ‘ ; ’ [ Var < var > { ‘ ; ’ < var > } ] Begin [<
+    // ] ] ‘ ) ’ ‘ ; ’ [ Var < var > { < var > } ] Begin [<
     // procedure-or-function > [ { < procedure-or-function > } ] ] End ‘ ; ’
     private void procProcedure() {
         eat(TokenType.PROCEDURE);
@@ -98,7 +98,7 @@ public class SyntaticAnalysis {
     }
 
     // < function > ::= Function < name > ‘ ( ’ [ < param > { ‘ ; ’ < param > } ] ‘
-    // ) ’ ‘ : ’ < return > ‘ ; ’ [ Var < var > { ‘ ; ’ < var > } ] Begin [ <
+    // ) ’ ‘ : ’ < return > ‘ ; ’ [ Var < var > { < var > } ] Begin [ <
     // procedure-or-function > [ { < procedure-or-function > } ] ] End ‘ ; ’
     private void procFunction() {
         eat(TokenType.FUNCTION);
@@ -139,17 +139,15 @@ public class SyntaticAnalysis {
         procType();
     }
 
-    // <param> ::= { <name> [ { ',' <name> }] ':' <type> }
+    // <param> ::= <name> [ { ',' <name> }] ':' <type>
     private void procParam() {
-        while (current.type == TokenType.ID) {
+        procName();
+        while (current.type == TokenType.COLON) {
+            advance();
             procName();
-            while (current.type == TokenType.COLON) {
-                advance();
-                procName();
-            }
-            eat(TokenType.DOT2);
-            procType();
         }
+        eat(TokenType.DOT2);
+        procType();
     }
 
     // <type> ::= Integer | Real | String | Boolean
