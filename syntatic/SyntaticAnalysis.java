@@ -81,7 +81,7 @@ public class SyntaticAnalysis {
         if (current.type == (TokenType.VAR)) {
             advance();
             procVar();
-            while (current.type != TokenType.BEGIN) {
+            while (current.type == TokenType.ID) {
                 procVar();
             }
         }
@@ -118,7 +118,7 @@ public class SyntaticAnalysis {
         if (current.type == (TokenType.VAR)) {
             advance();
             procVar();
-            while (current.type != TokenType.BEGIN) {
+            while (current.type == TokenType.ID) {
                 procVar();
             }
         }
