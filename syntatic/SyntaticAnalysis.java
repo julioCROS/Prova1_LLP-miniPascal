@@ -1,6 +1,5 @@
 package syntatic;
 
-import interpreter.command.Command;
 import lexical.Lexeme;
 import lexical.LexicalAnalysis;
 import lexical.TokenType;
@@ -15,11 +14,9 @@ public class SyntaticAnalysis {
         this.current = lex.nextToken();
     }
 
-    public Command start() {
+    public void start() {
         procCode();
         eat(TokenType.END_OF_FILE);
-
-        return null;
     }
 
     private void advance() {
