@@ -1,2 +1,3 @@
 *.class
 interpreter/
+.vs
