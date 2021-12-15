@@ -59,9 +59,10 @@ public class SyntaticAnalysis {
         }
     }
 
-    // < procedure > ::= Procedure < name > ‘ ( ’ [ < param > [ { ‘ ; ’ < param > }
-    // ] ] ‘ ) ’ ‘ ; ’ [ Var < var > { < var > } ] Begin [<
-    // procedure-or-function > [ { < procedure-or-function > } ] ] End ‘ ; ’
+    // < procedure > ::= Procedure < name > ‘ ( ’ [ < param > [ { < param > } ] ] ‘
+    // ) ’
+    // ‘ ; ’ [ Var < var > { < var > } ] Begin { < procedure-or-function > } End
+    // ‘ ; ’
     private void procProcedure() {
         eat(TokenType.PROCEDURE);
         procName();
@@ -94,9 +95,9 @@ public class SyntaticAnalysis {
         eat(TokenType.SEMI_COLON);
     }
 
-    // < function > ::= Function < name > ‘ ( ’ [ < param > { ‘ ; ’ < param > } ] ‘
-    // ) ’ ‘ : ’ < return > ‘ ; ’ [ Var < var > { < var > } ] Begin [ <
-    // procedure-or-function > [ { < procedure-or-function > } ] ] End ‘ ; ’
+    // < function > ::= Function < name > ‘ ( ’ [ < param > { < param > } ] ‘ ) ’ ‘ : ’
+    // < return > ‘ ; ’ [ Var < var > { < var > } ] Begin { <
+    // procedure-or-function > } End ‘ ; ’
     private void procFunction() {
         eat(TokenType.FUNCTION);
         procName();
@@ -136,7 +137,7 @@ public class SyntaticAnalysis {
         procType();
     }
 
-    // <param> ::= <name> [ { ',' <name> }] ':' <type>
+    // <param> ::= <name> { ',' <name> } ':' <type>
     private void procParam() {
         procName();
         while (current.type == TokenType.COLON) {
@@ -162,7 +163,7 @@ public class SyntaticAnalysis {
         }
     }
 
-    // <var> ::= <name> [ { ',' <name> } ] ':' <type> ';'
+    // <var> ::= <name> { ',' <name> } ':' <type> ';'
     private void procVar() {
         procName();
         while (current.type == TokenType.COLON) {
