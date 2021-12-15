@@ -14,6 +14,6 @@ Begin
  End;
 End;
 
-Function method4() : Integer;
+Function method4(): Integer;
 Begin
-End;
+End; 

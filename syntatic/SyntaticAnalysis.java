@@ -81,7 +81,7 @@ public class SyntaticAnalysis {
         if (current.type == (TokenType.VAR)) {
             advance();
             procVar();
-            while (current.type == TokenType.SEMI_COLON) {
+            while (current.type != TokenType.BEGIN) {
                 procVar();
             }
         }
@@ -118,8 +118,7 @@ public class SyntaticAnalysis {
         if (current.type == (TokenType.VAR)) {
             advance();
             procVar();
-            while (current.type == TokenType.SEMI_COLON) {
-                advance();
+            while (current.type != TokenType.BEGIN) {
                 procVar();
             }
         }
@@ -170,7 +169,6 @@ public class SyntaticAnalysis {
 
     // <var> ::= <name> [ { ',' <name> } ] ':' <type> ';'
     private void procVar() {
-        System.out.println(" ****** Dentro de procVar: " + current.type);
         procName();
         while (current.type == TokenType.COLON) {
             advance();
